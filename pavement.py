@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """ AuVyon - Audio-Visual Tools.
 
-    AuVyon collects little helpers to handle media data.
+    AuVyon collects little helpers to work with media data.
 
     Copyright (c) 2011 The PyroScope Project <pyroscope.project@gmail.com>
 
@@ -76,21 +76,23 @@ project = dict(
     long_description = __doc__.split('.', 1)[1].strip(),
     license = [line.strip() for line in __doc__.splitlines()
         if line.strip().startswith("Copyright")][0],
-    url = "http://code.google.com/p/pyroscope/",
-    keywords = "bittorrent rtorrent cli python",
+    url = "https://github.com/pyroscope/auvyon",
+    keywords = "audio video metadata cli tool python",
     classifiers = [
         # see http://pypi.python.org/pypi?:action=list_classifiers
-        #"Development Status :: 3 - Alpha",
+        "Development Status :: 3 - Alpha",
         #"Development Status :: 4 - Beta",
-        "Development Status :: 5 - Production/Stable",
+        #"Development Status :: 5 - Production/Stable",
         "Environment :: Console",
         "Intended Audience :: End Users/Desktop",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: GNU General Public License (GPL)",
         "Natural Language :: English",
-        "Operating System :: POSIX",
+        "Operating System :: OS Independent",
         "Programming Language :: Python :: 2.5",
-        "Topic :: Communications :: File Sharing",
+        "Topic :: Multimedia",
+        "Topic :: Multimedia :: Sound/Audio",
+        "Topic :: Multimedia :: Video",
         "Topic :: Software Development :: Libraries :: Python Modules",
         "Topic :: Utilities",
     ],
@@ -117,12 +119,6 @@ def toplevel_packages():
 def bootstrap():
     """ Initialize project.
     """
-    # Link files shared by subprojects
-    debian = path("debian")
-    debian.exists() or debian.makedirs()
-    
-    for shared in ("debian/changelog", "LICENSE"):
-        path(shared).exists() or (path("..") / shared).link(shared)
 
 
 @task
@@ -219,9 +215,7 @@ def coverage():
 def functest():
     """ Functional test of the command line tools.
     """
-    sh("bin/mktor -o build/pavement.torrent pavement.py http://example.com/")
-    sh("bin/mktor -o build/tests.torrent -x '*.pyc' -r 'pyroscope tests' --private src/tests/ http://example.com/")
-    sh("bin/lstor build/*.torrent")
+    sh("echo nothing at the moment")
 
 
 #
