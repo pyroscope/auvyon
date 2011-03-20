@@ -1,14 +1,19 @@
 WHAT IS IT?
+===========
 
 AuVyon collects little helpers to work with media data.
 
+See https://github.com/pyroscope/auvyon/wiki for more.
+
 
 INSTALLATION
+============
 
 easy_install auvyon
 
 
 ACKNOWLEDGEMENTS
+================
 
 Repository hosting @ github.
 
