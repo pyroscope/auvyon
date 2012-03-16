@@ -42,14 +42,15 @@ def waveform_image(mediafile, xy_size, outdir=None, center_color=None, outer_col
     return outfile
 
 
-def waveform_stack(mediafiles, xy_size, outdir=None, label_style=None, 
+def waveform_stack(mediafiles, xy_size, output=None, label_style=None, 
         center_color=None, outer_color=None, bg_color=None):
     """ Create a stack of waveform images from audio data.
         Return path to created image file.
     """
     img_files = []
-    outdir = outdir or os.path.dirname(os.path.commonprefix(mediafiles))
-    outfile = os.path.join(outdir, "waveforms.jpg")
+    output = output or os.path.abspath(os.path.dirname(os.path.commonprefix(mediafiles)))
+    if os.path.isdir(output):
+        output = os.path.join(output, "waveforms.jpg")
     cmd = [config.CMD_IM_MONTAGE, "-tile", "1x%d" % len(mediafiles), "-geometry", "%dx%d" % xy_size, 
         "-label", "%t"] + shlex.split(label_style or WAVE_LABEL_STYLE)
 
@@ -61,13 +62,13 @@ def waveform_stack(mediafiles, xy_size, outdir=None, label_style=None,
             img_files.append(waveform_image(mediafile, xy_size, tempdir, center_color, outer_color, bg_color))
 
         cmd.extend(img_files)
-        cmd.append(outfile)
+        cmd.append(output)
         subprocess.check_call(cmd, stdout=open(os.devnull, "wb"), stderr=subprocess.STDOUT)
     finally:
         if os.path.isdir(tempdir):
             shutil.rmtree(tempdir, ignore_errors=True)
 
-    return outfile
+    return output
 
 
 def _main():
