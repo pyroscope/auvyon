@@ -75,7 +75,7 @@ def _main():
     """ Command line interface for testing.
     """
     if len(sys.argv) <= 1:
-        print("Usage: python -m auvyon.imaging.waveform <mediafile>...")
+        print("Usage: python -m auvyon.imaging.waveforms <mediafile>...")
     else:
         try:
             print("Created %s" % waveform_stack(sys.argv[1:], (640, 48)))
