@@ -17,7 +17,7 @@ from auvyon.audio import transcode
 WAVE_CENTER_COLOR = (0x00, 0xbb, 0x11, 0xff)
 WAVE_OUTER_COLOR  = (0x99, 0x00, 0x11, 0xff)
 WAVE_BG_COLOR     = (0x11, 0x11, 0x33, 0xff)
-WAVE_LABEL_STYLE  = "-background '#333366ff' -stroke '#fff' -font Verdana-Standard"
+WAVE_LABEL_STYLE  = "-background '#333366ff' -stroke '#fff' -font DejaVu-Sans-ExtraLight -pointsize 12"
 
 
 def waveform_image(mediafile, xy_size, outdir=None, center_color=None, outer_color=None, bg_color=None):
@@ -51,8 +51,8 @@ def waveform_stack(mediafiles, xy_size, output=None, label_style=None,
     output = output or os.path.abspath(os.path.dirname(os.path.commonprefix(mediafiles)))
     if os.path.isdir(output):
         output = os.path.join(output, "waveforms.jpg")
-    cmd = [config.CMD_IM_MONTAGE, "-tile", "1x%d" % len(mediafiles), "-geometry", "%dx%d" % xy_size, 
-        "-label", "%t"] + shlex.split(label_style or WAVE_LABEL_STYLE)
+    cmd = [config.CMD_IM_MONTAGE] + shlex.split(label_style or WAVE_LABEL_STYLE)
+    cmd += ["-tile", "1x%d" % len(mediafiles), "-geometry", "%dx%d" % xy_size, "-label", "%t"]
 
     try:
         tempdir = tempfile.mktemp(__name__)
