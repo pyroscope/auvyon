@@ -33,8 +33,17 @@ Otherwise, to create a working directory from source, use
 This creates a virtualenv with all dependencies and necessary tools installed.
 
 
+To test waveform creation, use
+    python -m auvyon.imaging.waveforms src/tests/data/Parrot_sketch.ogg 
+    display src/tests/data/waveforms.jpg
+
+
+
 ACKNOWLEDGEMENTS
 ================
 
 Repository hosting @ github.
+
+Test data sources:
+    http://en.wikipedia.org/wiki/File:Parrot_sketch.ogg
 
