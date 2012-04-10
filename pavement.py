@@ -65,6 +65,9 @@ project = dict(
     ],
     setup_requires = [
     ],
+    extras_require = {
+        "waveforms": ["waveform>=0.4"],
+    },
 
     # tests
     test_suite = "nose.collector",

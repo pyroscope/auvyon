@@ -9,7 +9,28 @@ See https://github.com/pyroscope/auvyon/wiki for more.
 INSTALLATION
 ============
 
-easy_install auvyon
+First, install basic requirements as root, e.g. on Debian and similar distros:
+
+    sudo apt-get install python-virtualenv libmpg123-dev libsndfile1-dev \
+        imagemagick ffmpeg flac
+    
+If you can't find all of these packages for your distro, some features might not work.
+
+
+Then, for installing a release version, just call
+
+    easy_install auvyon
+
+[NB: There currently *is* no release version]
+
+
+Otherwise, to create a working directory from source, use
+
+    git clone git://github.com/pyroscope/auvyon.git
+    cd auvyon
+    . ./bootstrap.sh
+
+This creates a virtualenv with all dependencies and necessary tools installed.
 
 
 ACKNOWLEDGEMENTS
