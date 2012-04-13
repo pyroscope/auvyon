@@ -9,13 +9,13 @@ need_pypkg() {
 }
 
 # Use or create virtualenv
-which virtualenv >/dev/null || \
-    { echo "ERROR: You MUST install Python virtualenv (e.g. 'apt-get install python-virtualenv')!"; return 1; }
 if test -f ../bin/activate; then
     test -L bin -a -f bin/activate || ln -nfs ../bin .
 elif test ! -f ./bin/activate; then
+    python -c "import urllib2; open('virtualenv.py', 'w').write(\
+        urllib2.urlopen('https://raw.github.com/pypa/virtualenv/master/virtualenv.py').read())"
     deactivate 2>/dev/null || true
-    virtualenv --no-site-packages . || return 1
+    python virtualenv.py --system-site-packages . || return 1
 fi
 
 export DEBFULLNAME=pyroscope
