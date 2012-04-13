@@ -11,8 +11,12 @@ INSTALLATION
 
 First, install basic requirements as root, e.g. on Debian and similar distros:
 
-    sudo apt-get install python-virtualenv libmpg123-dev libsndfile1-dev \
-        imagemagick ffmpeg flac
+    sudo apt-get install \
+        imagemagick ffmpeg flac \
+        libmpg123-dev libsndfile1-dev \
+        libatlas-dev liblapack-dev gfortran \
+        python-virtualenv
+
     
 If you can't find all of these packages for your distro, some features might not work.
 
@@ -36,6 +40,10 @@ This creates a virtualenv with all dependencies and necessary tools installed.
 To test waveform creation, use
     python -m auvyon.imaging.waveforms src/tests/data/Parrot_sketch.ogg 
     display src/tests/data/waveforms.jpg
+
+To test spectrogram creation, use
+    python -m auvyon.imaging.spectrograms src/tests/data/Parrot_sketch.ogg 
+    display src/tests/data/spectrogram.png
 
 
 
