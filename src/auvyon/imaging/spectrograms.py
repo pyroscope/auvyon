@@ -46,18 +46,19 @@ def spectrogram_image(mediafile, dpi=72, outdir=None, outfile=None):
                 sys.stdout = saved_stdout
 
         # Limit data to 10 second window from the middle, else the FFT needs ages
-        waveform = [i[0] for i in waveform[len(waveform)//2 - 5*sample_rate : len(waveform)//2 + 5*sample_rate]]
+        data_window = sample_rate * 2 # secs
+        waveform = [i[0] for i in waveform[(len(waveform) - data_window) // 2 : (len(waveform) + data_window) // 2]]
         # TODO: combine / add the channels to mono
 
         # Calculate FFT inputs
-        nstep = int(sample_rate * 0.01) # 10ms step
-        nfft = nwin = int(sample_rate * 0.04) & ~1 # 40ms window
+        nstep = int(sample_rate * 0.001) # 1ms step
+        nfft = nwin = int(sample_rate * 0.005) & ~1 # 5ms window
         window = np.hamming(nwin)
 
         # Create spectrogram
         pylab.spectral()
         for khz in range(16, 22, 2):
-            pylab.text(9.9, khz * 1000 + 50, "%dkHz" % khz, ha="right")
+            pylab.text(data_window / sample_rate * .99, khz * 1000 + 75, "%d kHz" % khz, ha="right")
             pylab.axhline(khz * 1000)
         pylab.axis("off")
         pylab.specgram(waveform, NFFT=nfft, Fs=sample_rate, window=window)
@@ -67,7 +68,7 @@ def spectrogram_image(mediafile, dpi=72, outdir=None, outfile=None):
             pylab.savefig(outfile + ".png", format='png', facecolor="#000000", edgecolor="#000000", 
                 dpi=dpi, transparent=True, bbox_inches="tight")
 
-            cmd = [config.CMD_IM_CONVERT, "-trim", outfile + ".png", outfile]
+            cmd = [config.CMD_IM_CONVERT, "-trim", "-quality", "85", outfile + ".png", outfile]
             subprocess.check_call(cmd, stdout=black_hole, stderr=subprocess.STDOUT)
         finally:
             if os.path.exists(outfile + ".png"):
