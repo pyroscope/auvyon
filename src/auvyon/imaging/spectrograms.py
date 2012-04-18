@@ -13,6 +13,7 @@ from auvyon.audio import transcode
 
 
 def spectrogram_image(mediafile, dpi=72, outdir=None, outfile=None):
+    # TODO: Add some of the constants below as parameters
     """ Create spectrogram image from audio data.
         Return path to created image file.
     """
@@ -57,7 +58,7 @@ def spectrogram_image(mediafile, dpi=72, outdir=None, outfile=None):
 
         # Create spectrogram
         pylab.spectral()
-        for khz in range(16, 22, 2):
+        for khz in (5, 10, 16, 18, 20):
             pylab.text(data_window / sample_rate * .99, khz * 1000 + 75, "%d kHz" % khz, ha="right")
             pylab.axhline(khz * 1000)
         pylab.axis("off")
