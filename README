@@ -45,7 +45,7 @@ To test waveform creation, use
 
 To test spectrogram creation, use
     $AUVYON_HOME/bin/python -m auvyon.imaging.spectrograms $AUVYON_HOME/src/tests/data/Parrot_sketch.ogg 
-    display $AUVYON_HOME/src/tests/data/spectrogram.png
+    display $AUVYON_HOME/src/tests/data/spectrogram.jpg
     # on a headless system, use "identify" instead of "display"
 
 
