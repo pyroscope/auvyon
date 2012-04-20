@@ -36,6 +36,8 @@ which ffmpeg >/dev/null || \
     { echo "ERROR: You MUST install ffmpeg (e.g. 'apt-get install ffmpeg')!"; ok=false; }
 which flac >/dev/null || \
     { echo "ERROR: You MUST install FLAC support (e.g. 'apt-get install flac')!"; ok=false; }
+which git >/dev/null || \
+    { echo "ERROR: You MUST install git (e.g. 'apt-get install git'; or possibly 'git-core')!"; ok=false; }
 
 # PyWaveform
 have_pypkg waveform || test -f /usr/include/mpg123.h || \
@@ -60,11 +62,17 @@ $ok || { echo "FATAL: Fix above dependency errors first!"; return 1; }
 ./bin/easy_install -U "yolk>=0.4.1" || return 1
 ./bin/easy_install -U "bpython" || return 1
 
-# Dependencies
-have_pypkg waveform || easy_install -U https://github.com/superjoe30/PyWaveform/zipball/master || :
-have_pypkg numpy || easy_install numpy || :
-have_pypkg matplotlib || easy_install matplotlib || :
-have_pypkg scipy || easy_install scipy || :
+# Dependencies (all optional, failures will lead to non-functional features)
+fail=""
+#have_pypkg waveform || easy_install -U https://github.com/superjoe30/PyWaveform/zipball/master || :
+have_pypkg waveform || \
+    ( git clone git://github.com/superjoe30/PyWaveform.git; cd PyWaveform; ../bin/python setup.py install ) || \
+    fail="$fail:PyWaveform install failure, creating waveform images won't work"
+have_pypkg numpy || easy_install numpy || fail="$fail:numpy install failure, spectrograms won't work"
+have_pypkg matplotlib || easy_install matplotlib || fail="$fail:matplotlib install failure, spectrograms won't work"
+have_pypkg scipy || easy_install scipy || fail="$fail:scipy install failure, spectrograms won't work"
 
 ./bin/paver develop -U
+
+test -z "$fail" || { echo "INSTALL FAILURES:"; tr : \\n <<<"$fail"; echo; }
 
