@@ -13,11 +13,11 @@ First, install basic requirements as root, e.g. on Debian and similar distros:
 
     sudo apt-get install \
         imagemagick ffmpeg flac \
-        libmpg123-dev libsndfile1-dev \
-        libatlas-dev liblapack-dev gfortran \
         python-numpy python-scipy python-matplotlib \
-        python-virtualenv virtualenvwrapper
-    
+        libmpg123-dev libsndfile1-dev libmagickwand-dev ttf-dejavu-extra \
+        libatlas-dev liblapack-dev gfortran \
+        python-virtualenv virtualenvwrapper git bzip2
+
 If you can't find all of these packages for your distro, some features might not work.
 
 

@@ -32,12 +32,21 @@ EOF
 ok=true
 which montage >/dev/null || \
     { echo "ERROR: You MUST install ImageMagick (e.g. 'apt-get install imagemagick')!"; ok=false; }
+which MagickWand-config >/dev/null || \
+    { echo "ERROR: You MUST install MagicWand dev support (e.g. 'apt-get install libmagickwand-dev')!"; ok=false; }
 which ffmpeg >/dev/null || \
     { echo "ERROR: You MUST install ffmpeg (e.g. 'apt-get install ffmpeg')!"; ok=false; }
 which flac >/dev/null || \
     { echo "ERROR: You MUST install FLAC support (e.g. 'apt-get install flac')!"; ok=false; }
 which git >/dev/null || \
     { echo "ERROR: You MUST install git (e.g. 'apt-get install git'; or possibly 'git-core')!"; ok=false; }
+if which dpkg >/dev/null ; then
+    dpkg -l ttf-dejavu-extra | grep ^ii >/dev/null || \
+        { echo "ERROR: You MUST install ttf-dejavu-extra (e.g. 'apt-get install ttf-dejavu-extra')!"; ok=false; }
+else
+    echo "WARNING: Not a debian system, make sure you have 'ttf-dejavu-extra' or similar installed!"
+    echo -n .; sleep 1; echo -n .; sleep 1; echo -n .; sleep 1; echo -n .; sleep 1; echo -n .; sleep 1; echo
+fi
 
 # PyWaveform
 have_pypkg waveform || test -f /usr/include/mpg123.h || \
