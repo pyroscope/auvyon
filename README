@@ -30,20 +30,23 @@ Then, for installing a release version, just call
 
 Otherwise, to create a working directory from source, use
 
+    cd; mkdir -p src; cd src
     git clone git://github.com/pyroscope/auvyon.git
-    cd auvyon
+    cd auvyon; export AUVYON_HOME="$PWD"
     . ./bootstrap.sh
 
 This creates a virtualenv with all dependencies and necessary tools installed.
 
 
 To test waveform creation, use
-    python -m auvyon.imaging.waveforms src/tests/data/Parrot_sketch.ogg 
-    display src/tests/data/waveforms.jpg
+    $AUVYON_HOME/bin/python -m auvyon.imaging.waveforms $AUVYON_HOME/src/tests/data/Parrot_sketch.ogg 
+    display $AUVYON_HOME/src/tests/data/waveforms.jpg
+    # on a headless system, use "identify" instead of "display"
 
 To test spectrogram creation, use
-    python -m auvyon.imaging.spectrograms src/tests/data/Parrot_sketch.ogg 
-    display src/tests/data/spectrogram.png
+    $AUVYON_HOME/bin/python -m auvyon.imaging.spectrograms $AUVYON_HOME/src/tests/data/Parrot_sketch.ogg 
+    display $AUVYON_HOME/src/tests/data/spectrogram.png
+    # on a headless system, use "identify" instead of "display"
 
 
 
