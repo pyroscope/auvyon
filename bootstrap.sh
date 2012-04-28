@@ -49,8 +49,8 @@ else
 fi
 
 # PyWaveform
-have_pypkg waveform || test -f /usr/include/mpg123.h || \
-    { echo "ERROR: You MUST install mpg123 headers (e.g. 'apt-get install libmpg123-dev')!"; ok=false; }
+#have_pypkg waveform || test -f /usr/include/mpg123.h || \
+#    { echo "ERROR: You MUST install mpg123 headers (e.g. 'apt-get install libmpg123-dev')!"; ok=false; }
 have_pypkg waveform || test -f /usr/include/sndfile.h || \
     { echo "ERROR: You MUST install sndfile headers (e.g. 'apt-get install libsndfile1-dev')!"; ok=false; }
 
@@ -73,10 +73,10 @@ $ok || { echo "FATAL: Fix above dependency errors first!"; return 1; }
 
 # Dependencies (all optional, failures will lead to non-functional features)
 fail=""
-#have_pypkg waveform || easy_install -U https://github.com/superjoe30/PyWaveform/zipball/master || :
+#have_pypkg waveform || easy_install -U https://github.com/pyroscope/PyWaveform/zipball/master || :
 have_pypkg waveform || \
-    ( git clone git://github.com/superjoe30/PyWaveform.git; cd PyWaveform; ../bin/python setup.py install ) || \
-    fail="$fail:PyWaveform install failure, creating waveform images won't work"
+    ( git clone git://github.com/pyroscope/PyWaveform.git ; cd PyWaveform; ../bin/python setup.py install ) || \
+      fail="$fail:PyWaveform install failure, creating waveform images won't work"
 have_pypkg numpy || easy_install numpy || fail="$fail:numpy install failure, spectrograms won't work"
 have_pypkg matplotlib || easy_install matplotlib || fail="$fail:matplotlib install failure, spectrograms won't work"
 have_pypkg scipy || easy_install scipy || fail="$fail:scipy install failure, spectrograms won't work"
