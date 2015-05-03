@@ -1,5 +1,5 @@
-auvyon (0.1) hardy; urgency=low
+auvyon (0.1) precise; urgency=low
 
-  * project bootstrap 
+  * first release
 
- -- pyroscope <pyroscope.project@gmail.com>  Sat, 19 Mar 2011 23:04:54 +0100
+ -- pyroscope <pyroscope.project@gmail.com>  Sun, 03 May 2015 03:26:51 +0200

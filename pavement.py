@@ -56,7 +56,7 @@ project = dict(
     zip_safe = True,
     data_files = [
         ("EGG-INFO", [
-            "README", "LICENSE", "debian/changelog", 
+            "README", "LICENSE", "debian/changelog",
         ]),
     ],
 
@@ -83,8 +83,7 @@ project = dict(
     keywords = "audio video metadata cli tool python",
     classifiers = [
         # see http://pypi.python.org/pypi?:action=list_classifiers
-        "Development Status :: 3 - Alpha",
-        #"Development Status :: 4 - Beta",
+        "Development Status :: 4 - Beta",
         #"Development Status :: 5 - Production/Stable",
         "Environment :: Console",
         "Intended Audience :: End Users/Desktop",
@@ -288,7 +287,7 @@ def lint():
     argv = []
     rcfile = options.lint.get("rcfile")
     if not rcfile and path("pylint.cfg").exists():
-        rcfile = "pylint.cfg" 
+        rcfile = "pylint.cfg"
     if rcfile:
         argv += ["--rcfile", os.path.abspath(rcfile)]
     if options.lint.get("msg_only", False):
