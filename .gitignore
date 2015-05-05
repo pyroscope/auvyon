@@ -8,6 +8,5 @@ bin
 include
 lib
 man
-setup.py
 src/*.egg-info
 PyWaveform
