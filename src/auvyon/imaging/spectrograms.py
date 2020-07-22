@@ -57,7 +57,7 @@ def spectrogram_image(mediafile, dpi=72, outdir=None, outfile=None):
         window = np.hamming(nwin)
 
         # Create spectrogram
-        pylab.spectral()
+        pylab.nipy_spectral()
         for khz in (5, 10, 16, 18, 20):
             pylab.text(data_window / sample_rate * .99, khz * 1000 + 75, "%d kHz" % khz, ha="right")
             pylab.axhline(khz * 1000)
@@ -66,7 +66,7 @@ def spectrogram_image(mediafile, dpi=72, outdir=None, outfile=None):
 
         # Write to image
         try:
-            pylab.savefig(outfile + ".png", format='png', facecolor="#000000", edgecolor="#000000", 
+            pylab.savefig(outfile + ".png", format='png', facecolor="#000000", edgecolor="#000000",
                 dpi=dpi, transparent=True, bbox_inches="tight")
 
             cmd = [config.CMD_IM_CONVERT, "-trim", "-quality", "85", outfile + ".png", outfile]
